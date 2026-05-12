@@ -40,7 +40,7 @@ custom_replacements = {
     # Resource provisioning global connectivity
     ddos_protection_plan_enabled = true
 
-    # Resource provisioning primary connectivity
+    # Resource provisioning primary for connectivity
     primary_firewall_enabled                                             = true
     primary_firewall_sku_tier                                            = "Premium"
     primary_firewall_management_ip_enabled                               = true
