@@ -32,13 +32,15 @@ custom_replacements = {
   NOTE: You cannot refer to another custom name in this variable.
   */
   names = {
+    amba_resource_group_name                 = "rg-amba-$${starter_location_01}"
+    amba_user_assigned_managed_identity_name = "uami-mgmt-amba-$${starter_location_01}"
     # Defender email security contact
     defender_email_security_contact = "v-pnallaboth@microsoft.com"
 
     # Resource provisioning global connectivity
     ddos_protection_plan_enabled = true
 
-    # Resource provisioning primary connectivity
+    # Resource provisioning primary for connectivity
     primary_firewall_enabled                                             = true
     primary_firewall_sku_tier                                            = "Premium"
     primary_firewall_management_ip_enabled                               = true
@@ -182,6 +184,24 @@ management_group_settings = {
     ama_vm_insights_data_collection_rule_id     = "$${ama_vm_insights_data_collection_rule_id}"
     ama_user_assigned_managed_identity_id       = "$${ama_user_assigned_managed_identity_id}"
     ama_user_assigned_managed_identity_name     = "$${ama_user_assigned_managed_identity_name}"
+    amba_alz_management_subscription_id            = "$${subscription_id_management}"
+    amba_alz_resource_group_location               = "$${starter_location_01}"
+    amba_alz_resource_group_name                   = "$${amba_resource_group_name}"
+    amba_alz_user_assigned_managed_identity_name   = "$${amba_user_assigned_managed_identity_name}"
+    amba_alz_action_group_email                    = []
+    amba_alz_arm_role_id                           = []
+    amba_alz_resource_group_tags                   = {}
+    amba_alz_byo_user_assigned_managed_identity_id = ""
+    amba_alz_disable_tag_name                      = ""
+    amba_alz_disable_tag_values                    = []
+    amba_alz_webhook_service_uri                   = []
+    amba_alz_event_hub_resource_id                 = []
+    amba_alz_function_resource_id                  = ""
+    amba_alz_function_trigger_url                  = ""
+    amba_alz_logicapp_resource_id                  = ""
+    amba_alz_logicapp_callback_url                 = ""
+    amba_alz_byo_alert_processing_rule             = ""
+    amba_alz_byo_action_group                      = []
     log_analytics_workspace_id                  = "$${log_analytics_workspace_id}"
     ddos_protection_plan_id                     = "$${ddos_protection_plan_id}"
     private_dns_zone_subscription_id            = "$${subscription_id_connectivity}"
