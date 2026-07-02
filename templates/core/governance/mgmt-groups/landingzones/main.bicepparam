@@ -14,7 +14,9 @@ param landingZonesConfig = {
   managementGroupIntermediateRootName: 'alz'
   managementGroupDisplayName: 'Landing Zones'
   managementGroupDoNotEnforcePolicyAssignments: []
-  managementGroupExcludedPolicyAssignments: []
+  managementGroupExcludedPolicyAssignments: [
+    'Enable-DDoS-VNET'
+  ]
   customerRbacRoleDefs: []
   customerRbacRoleAssignments: []
   customerPolicyDefs: []
@@ -31,13 +33,6 @@ param landingZonesConfig = {
 
 // Only specify the parameters you want to override - others will use defaults from JSON files
 param parPolicyAssignmentParameterOverrides = {
-  'Enable-DDoS-VNET': {
-    parameters: {
-      ddosPlan: {
-        value: '/subscriptions/c228b07c-eaaa-4f50-89c2-5dd6b5dfc916/resourceGroups/rg-alz-amer-conn-${parLocations[0]}/providers/Microsoft.Network/ddosProtectionPlans/ddos-alz-${parLocations[0]}'
-      }
-    }
-  }
   'Deploy-AzSqlDb-Auditing': {
     parameters: {
       logAnalyticsWorkspaceId: {
