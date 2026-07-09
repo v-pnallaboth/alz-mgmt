@@ -36,7 +36,7 @@ param parPolicyAssignmentParameterOverrides = {
         value: '/subscriptions/141ce5b3-08b0-4589-86ce-2d077f913fe7/resourcegroups/rg-alz-amer-logging-${parLocations[0]}/providers/Microsoft.OperationalInsights/workspaces/law-alz-${parLocations[0]}'
       }
       emailSecurityContact: {
-        value: 'security@yourcompany.com'
+        value: 'v-pnallaboth@microsoft.com'
       }
       ascExportResourceGroupName: {
         value: 'rg-alz-asc-${parLocations[0]}'
@@ -70,7 +70,7 @@ param parPolicyAssignmentParameterOverrides = {
       }
       actionGroupResources: {
         value: {
-          actionGroupEmail: ['triage@yourcompany.com']
+          actionGroupEmail: ['v-pnallaboth@microsoft.com']
           eventHubResourceId: []
           functionResourceId: ''
           functionTriggerUrl: ''
