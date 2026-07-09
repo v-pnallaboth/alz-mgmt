@@ -4,6 +4,7 @@ using './main.bicep'
 param parLocations = [
   'eastus2'
   'westus2'
+  'centralus'
 ]
 param parTags = {}
 param parEnableTelemetry = true
@@ -147,6 +148,67 @@ param vwanHubs = [
       sidecarVirtualNetworkEnabled: true
       addressPrefixes: [
         '10.1.4.0/22'
+      ]
+    }
+  }
+  {
+    hubName: 'vhub-alz-${parLocations[2]}'
+    location: parLocations[2]
+    addressPrefix: '10.2.0.0/22'
+    allowBranchToBranchTraffic: true
+    preferredRoutingGateway: 'VpnGateway'
+    azureFirewallSettings: {
+      deployAzureFirewall: false
+      name: 'afw-alz-${parLocations[2]}'
+    }
+    expressRouteGatewaySettings: {
+      deployExpressRouteGateway: false
+      name: 'ergw-alz-${parLocations[2]}'
+      minScaleUnits: 1
+      maxScaleUnits: 1
+      allowNonVirtualWanTraffic: false
+    }
+    s2sVpnGatewaySettings: {
+      deployS2sVpnGateway: true
+      name: 's2s-alz-${parLocations[2]}'
+      scaleUnit: 1
+    }
+    p2sVpnGatewaySettings: {
+      deployP2sVpnGateway: false
+      name: 'p2s-alz-${parLocations[2]}'
+      scaleUnit: 1
+      vpnServerConfiguration: {
+        vpnAuthenticationTypes: ['AAD']
+      }
+      vpnClientAddressPool: {
+        addressPrefixes: ['172.16.2.0/24']
+      }
+    }
+    ddosProtectionPlanSettings: {
+      deployDdosProtectionPlan: false
+    }
+    dnsSettings: {
+      deployPrivateDnsZones: true
+      deployDnsPrivateResolver: false
+      privateDnsResolverName: 'dnspr-alz-${parLocations[2]}'
+      privateDnsZones: [
+        'privatelink.{regionName}.azurecontainerapps.io'
+        'privatelink.{regionName}.kusto.windows.net'
+        'privatelink.{regionName}.azmk8s.io'
+        'privatelink.{regionName}.prometheus.monitor.azure.com'
+        'privatelink.{regionCode}.backup.windowsazure.com'
+      ]
+    }
+    bastionSettings: {
+      deployBastion: false
+      name: 'bas-alz-${parLocations[2]}'
+      sku: 'Standard'
+    }
+    sideCarVirtualNetwork: {
+      name: 'vnet-sidecar-alz-${parLocations[2]}'
+      sidecarVirtualNetworkEnabled: true
+      addressPrefixes: [
+        '10.2.4.0/22'
       ]
     }
   }
