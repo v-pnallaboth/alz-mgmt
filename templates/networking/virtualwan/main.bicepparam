@@ -38,20 +38,20 @@ param vwanHubs = [
     location: parLocations[0]
     addressPrefix: '10.0.0.0/22'
     allowBranchToBranchTraffic: true
-    preferredRoutingGateway: 'ExpressRoute'
+    preferredRoutingGateway: 'VpnGateway'
     azureFirewallSettings: {
-      deployAzureFirewall: true
+      deployAzureFirewall: false
       name: 'afw-alz-${parLocations[0]}'
     }
     expressRouteGatewaySettings: {
-      deployExpressRouteGateway: true
+      deployExpressRouteGateway: false
       name: 'ergw-alz-${parLocations[0]}'
       minScaleUnits: 1
       maxScaleUnits: 1
       allowNonVirtualWanTraffic: false
     }
     s2sVpnGatewaySettings: {
-      deployS2sVpnGateway: false
+      deployS2sVpnGateway: true
       name: 's2s-alz-${parLocations[0]}'
       scaleUnit: 1
     }
@@ -67,13 +67,13 @@ param vwanHubs = [
       }
     }
     ddosProtectionPlanSettings: {
-      deployDdosProtectionPlan: true
+      deployDdosProtectionPlan: false
       name: 'ddos-alz-${parLocations[0]}'
       tags: {}
     }
     dnsSettings: {
       deployPrivateDnsZones: true
-      deployDnsPrivateResolver: true
+      deployDnsPrivateResolver: false
       privateDnsResolverName: 'dnspr-alz-${parLocations[0]}'
     }
     bastionSettings: {
@@ -94,20 +94,20 @@ param vwanHubs = [
     location: parLocations[1]
     addressPrefix: '10.1.0.0/22'
     allowBranchToBranchTraffic: true
-    preferredRoutingGateway: 'ExpressRoute'
+    preferredRoutingGateway: 'VpnGateway'
     azureFirewallSettings: {
-      deployAzureFirewall: true
+      deployAzureFirewall: false
       name: 'afw-alz-${parLocations[1]}'
     }
     expressRouteGatewaySettings: {
-      deployExpressRouteGateway: true
+      deployExpressRouteGateway: false
       name: 'ergw-alz-${parLocations[1]}'
       minScaleUnits: 1
       maxScaleUnits: 1
       allowNonVirtualWanTraffic: false
     }
     s2sVpnGatewaySettings: {
-      deployS2sVpnGateway: false
+      deployS2sVpnGateway: true
       name: 's2s-alz-${parLocations[1]}'
       scaleUnit: 1
     }
@@ -127,7 +127,7 @@ param vwanHubs = [
     }
     dnsSettings: {
       deployPrivateDnsZones: true
-      deployDnsPrivateResolver: true
+      deployDnsPrivateResolver: false
       privateDnsResolverName: 'dnspr-alz-${parLocations[1]}'
       privateDnsZones: [
         'privatelink.{regionName}.azurecontainerapps.io'
@@ -138,7 +138,7 @@ param vwanHubs = [
       ]
     }
     bastionSettings: {
-      deployBastion: true
+      deployBastion: false
       name: 'bas-alz-${parLocations[1]}'
       sku: 'Standard'
     }
