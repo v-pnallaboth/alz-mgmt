@@ -39,8 +39,7 @@ param vwanHubs = [
     location: parLocations[0]
     addressPrefix: '10.0.0.0/22'
     allowBranchToBranchTraffic: true
-    preferredRoutingGateway: 'VpnGateway'
-    azureFirewallSettings: {
+      azureFirewallSettings: {
       deployAzureFirewall: false
       name: 'afw-alz-${parLocations[0]}'
     }
@@ -95,8 +94,7 @@ param vwanHubs = [
     location: parLocations[1]
     addressPrefix: '10.1.0.0/22'
     allowBranchToBranchTraffic: true
-    preferredRoutingGateway: 'VpnGateway'
-    azureFirewallSettings: {
+      azureFirewallSettings: {
       deployAzureFirewall: false
       name: 'afw-alz-${parLocations[1]}'
     }
@@ -156,8 +154,7 @@ param vwanHubs = [
     location: parLocations[2]
     addressPrefix: '10.2.0.0/22'
     allowBranchToBranchTraffic: true
-    preferredRoutingGateway: 'VpnGateway'
-    azureFirewallSettings: {
+      azureFirewallSettings: {
       deployAzureFirewall: false
       name: 'afw-alz-${parLocations[2]}'
     }
