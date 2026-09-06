@@ -1,0 +1,97 @@
+using './main.bicep'
+
+// General Parameters
+param parLocations = [
+  'eastus2'
+  ]
+param parGlobalResourceLock = {
+  name: 'GlobalResourceLock'
+  kind: 'None'
+  notes: 'This lock was created by the ALZ Bicep Accelerator.'
+}
+param parTags = {}
+param parEnableTelemetry = true
+
+// Resource Group Parameters
+param parHubNetworkingResourceGroupNamePrefix = 'rg-alz-conn'
+param parDnsResourceGroupNamePrefix = 'rg-alz-dns'
+param parDnsPrivateResolverResourceGroupNamePrefix = 'rg-alz-dnspr'
+
+// Hub Networking Parameters
+param hubNetworks = [
+  {
+    name: 'vnet-alz-${parLocations[0]}'
+    location: parLocations[0]
+    addressPrefixes: [
+      '10.0.0.0/22'
+    ]
+    deployPeering: false
+    dnsServers: []
+    subnets: [
+      {
+        name: 'AzureBastionSubnet'
+        addressPrefix: '10.0.0.64/26'
+      }
+      {
+        name: 'GatewaySubnet'
+        addressPrefix: '10.0.0.128/27'
+      }
+      {
+        name: 'AzureFirewallSubnet'
+        addressPrefix: '10.0.0.0/26'
+      }
+      {
+        name: 'AzureFirewallManagementSubnet'
+        addressPrefix: '10.0.0.192/26'
+      }
+      {
+        name: 'DNSPrivateResolverInboundSubnet'
+        addressPrefix: '10.0.0.160/28'
+        delegation: 'Microsoft.Network/dnsResolvers'
+      }
+      {
+        name: 'DNSPrivateResolverOutboundSubnet'
+        addressPrefix: '10.0.0.176/28'
+        delegation: 'Microsoft.Network/dnsResolvers'
+      }
+    ]
+    azureFirewallSettings: {
+      deployAzureFirewall: false
+      azureFirewallName: 'afw-alz-${parLocations[0]}'
+      azureSkuTier: 'Standard'
+      publicIPAddressObject: {
+        name: 'pip-afw-alz-${parLocations[0]}'
+      }
+      managementIPAddressObject: {
+        name: 'pip-afw-mgmt-alz-${parLocations[0]}'
+      }
+    }
+    bastionHostSettings: {
+      deployBastion: true
+      bastionHostSettingsName: 'bas-alz-${parLocations[0]}'
+      skuName: 'Standard'
+    }
+    vpnGatewaySettings: {
+      deployVpnGateway: false
+      name: 'vgw-alz-${parLocations[0]}'
+      skuName: 'VpnGw1AZ'
+      vpnMode: 'activeActiveBgp'
+      vpnType: 'RouteBased'
+      asn: 65515
+    }
+    expressRouteGatewaySettings: {
+      deployExpressRouteGateway: false
+      name: 'ergw-alz-${parLocations[0]}'
+    }
+    privateDnsSettings: {
+      deployPrivateDnsZones: true
+      deployDnsPrivateResolver: true
+      privateDnsResolverName: 'dnspr-alz-${parLocations[0]}'
+      privateDnsZones: []
+    }
+    ddosProtectionPlanSettings: {
+      deployDdosProtectionPlan: true
+      name: 'ddos-alz-${parLocations[0]}'
+    }
+  }
+]
